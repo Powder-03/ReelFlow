@@ -1,0 +1,38 @@
+[
+  {
+    "handle": "@upsc_pathshala",
+    "followers": 280000,
+    "avg_engagement_rate": 3.8,
+    "top_performing_topics": [
+      "Daily Current Affairs in 60 seconds",
+      "IAS Officer daily routine breakdown",
+      "CSAT Maths quick tricks"
+    ],
+    "winning_formats": ["voiceover_montage", "fast_paced_text_overlay"],
+    "weaknesses": ["Generic script quality", "Overused Bollywood background scores", "Low bookmark rate"]
+  },
+  {
+    "handle": "@civilservices_mantra",
+    "followers": 195000,
+    "avg_engagement_rate": 5.1,
+    "top_performing_topics": [
+      "Mains GS2 Model Answer Structure",
+      "Ethics case study framework",
+      "Toppers answer sheet review"
+    ],
+    "winning_formats": ["talking_head", "split_screen_analysis"],
+    "weaknesses": ["Academic tone sometimes too dry", "Hooks fail to stop general scroll"]
+  },
+  {
+    "handle": "@ias_drishti_shorts",
+    "followers": 410000,
+    "avg_engagement_rate": 4.6,
+    "top_performing_topics": [
+      "Mock interview savage moments",
+      "Constitution articles memory tricks",
+      "District Magistrate field inspection stories"
+    ],
+    "winning_formats": ["interview_clips", "rapid_fire_qa"],
+    "weaknesses": ["Low educational retention", "Sensationalized clickbait hooks"]
+  }
+]

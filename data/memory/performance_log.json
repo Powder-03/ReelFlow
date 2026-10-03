@@ -1,0 +1,20 @@
+[
+  {
+    "script_id": "test_script_42",
+    "logged_at": "2026-10-03T07:24:04.897749+00:00",
+    "engagement_rate": 7.8,
+    "views": 150000,
+    "saves": 12000,
+    "shares": 5000,
+    "comments": 400
+  },
+  {
+    "script_id": "test_script_42",
+    "logged_at": "2026-10-03T07:24:56.660885+00:00",
+    "engagement_rate": 7.8,
+    "views": 150000,
+    "saves": 12000,
+    "shares": 5000,
+    "comments": 400
+  }
+]
