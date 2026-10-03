@@ -12,6 +12,9 @@ from app.models.schemas import (
     GenerateRequest,
     GenerateResponse,
     FeedbackRequest,
+    HookCandidate,
+    HookEvaluationResult,
+    StrategyHypothesis,
 )
 
 __all__ = [
@@ -27,4 +30,7 @@ __all__ = [
     "GenerateRequest",
     "GenerateResponse",
     "FeedbackRequest",
+    "HookCandidate",
+    "HookEvaluationResult",
+    "StrategyHypothesis",
 ]

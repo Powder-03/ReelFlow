@@ -1,28 +1,37 @@
 import json
 import re
-from typing import Dict, Any
+from typing import Dict, Any, List
 from langsmith import traceable
 
 from app.agents.state import AgentState
 from app.core.llm import get_llm
-from app.models.schemas import StrategyDecision
+from app.models.schemas import StrategyDecision, StrategyHypothesis
+from app.guardrails.engine import GuardrailsEngine
+from app.store.json_store import JsonStore
 
-def _extract_json(text: str) -> Dict[str, Any]:
+def _extract_json(text: str) -> Any:
     text = text.strip()
-    match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
+    match = re.search(r"```(?:json)?\s*(\[.*?\]|\{.*?\})\s*```", text, re.DOTALL)
     if match:
         return json.loads(match.group(1))
+    first_bracket = text.find("[")
+    last_bracket = text.rfind("]")
+    if first_bracket != -1 and last_bracket != -1:
+        return json.loads(text[first_bracket : last_bracket + 1])
     first_brace = text.find("{")
     last_brace = text.rfind("}")
     if first_brace != -1 and last_brace != -1:
         return json.loads(text[first_brace : last_brace + 1])
     return json.loads(text)
 
-STRATEGY_PROMPT = """You are an Elite Instagram Content Strategist.
+STRATEGY_TOT_PROMPT = """You are an Elite Instagram Content Strategist executing Tree of Thoughts (ToT) exploration.
 
-Your goal is to select the single best content strategy for the next viral Instagram reel.
+Instead of outputting just one idea, you will BRANCH OUT AND EXPLORE 3 DIVERGENT STRATEGY HYPOTHESES:
+- Branch 1: High-Utility Study Hack / Blueprint (content_bucket: study_tips or strategy)
+- Branch 2: High-Emotion / Vulnerable Reality Check (content_bucket: motivation)
+- Branch 3: High-Urgency Current Affairs Debate / Critical Milestone (content_bucket: current_affairs or strategy)
 
-Intelligence Insights:
+Intelligence Inputs:
 - Upcoming Events: {upcoming_events}
 - Trending Topics: {trending_topics}
 - Content Gaps: {content_gaps}
@@ -35,51 +44,39 @@ Performance Memory:
 - Competitor Insights: {competitor_insights}
 
 User Content Request (if any): {content_request}
-
 {guardrail_feedback}
 
-DECISION REQUIREMENTS:
-1. topic: A specific, captivating reel topic (MUST NOT be in the avoid/fatigued list).
-2. content_bucket: One of ["study_tips", "motivation", "current_affairs", "strategy", "book_reviews"].
-3. hook_style: One of ["shock_stat", "question", "personal_story", "myth_bust", "challenge"].
-4. format: One of ["talking_head", "text_overlay", "voiceover_montage", "skit"].
-5. tone: Specific energy (e.g. "High conviction and empathetic", "Urgent reality check").
-6. reasoning: Detailed strategic rationale explaining why this specific combination will outperform current benchmarks.
-7. confidence: Numerical confidence score between 0.0 and 1.0.
-8. avoid_topics: List of topics currently fatigued or oversaturated.
-9. avoid_formats: List of formats currently on cooldown.
+For EACH of the 3 branches, output:
+- hypothesis_id: 1, 2, or 3
+- topic: Specific, compelling reel title
+- content_bucket: One of ["study_tips", "motivation", "current_affairs", "strategy", "book_reviews"]
+- hook_style: One of ["shock_stat", "question", "personal_story", "myth_bust", "challenge"]
+- format: One of ["talking_head", "text_overlay", "voiceover_montage", "skit"]
+- tone: Energy description
+- rationale: Why this branch has viral retention potential
+- confidence: Score between 0.0 and 1.0
 
-Return ONLY valid JSON matching StrategyDecision schema:
-{{
-  "topic": "string",
-  "content_bucket": "string",
-  "hook_style": "string",
-  "format": "string",
-  "tone": "string",
-  "reasoning": "string",
-  "confidence": 0.9,
-  "avoid_topics": ["string"],
-  "avoid_formats": ["string"]
-}}
+Return ONLY valid JSON matching a list of 3 StrategyHypothesis objects:
+[
+  {{
+    "hypothesis_id": 1,
+    "topic": "string",
+    "content_bucket": "study_tips",
+    "hook_style": "shock_stat",
+    "format": "talking_head",
+    "tone": "Authoritative and urgent",
+    "rationale": "string",
+    "confidence": 0.92
+  }},
+  ...
+]
 """
 
-@traceable(name="Strategy Agent", run_type="chain")
-async def strategy_node(state: AgentState) -> Dict[str, Any]:
-    """Strategy Agent: Formulates the next content move based on Intelligence and Memory."""
-    guardrail_result = state.get("guardrail_result")
-    retry_count = state.get("guardrail_retry_count", 0)
-
-    guardrail_feedback = ""
-    if guardrail_result and not guardrail_result.get("passed", True):
-        violations = guardrail_result.get("violations", [])
-        guardrail_feedback = (
-            f"\nATTENTION - PREVIOUS PROPOSAL REJECTED BY GUARDRAILS (Attempt {retry_count}):\n"
-            + "\n".join(f"- {v}" for v in violations)
-            + "\nYou MUST choose a DIFFERENT topic, hook style, or format that avoids these violations completely!\n"
-        )
-
-    llm = get_llm(temperature=0.6)
-    prompt = STRATEGY_PROMPT.format(
+@traceable(name="Strategy ToT: Level 1 Branching", run_type="chain")
+async def _generate_strategy_branches(state: AgentState, guardrail_feedback: str) -> List[StrategyHypothesis]:
+    """Generates 3 divergent strategy hypotheses in parallel thought trees."""
+    llm = get_llm(temperature=0.7)
+    prompt = STRATEGY_TOT_PROMPT.format(
         upcoming_events=json.dumps(state.get("upcoming_events", []), indent=2),
         trending_topics=json.dumps(state.get("trending_topics", []), indent=2),
         content_gaps=json.dumps(state.get("content_gaps", []), indent=2),
@@ -94,22 +91,131 @@ async def strategy_node(state: AgentState) -> Dict[str, Any]:
 
     response = await llm.ainvoke(prompt)
     try:
-        data = _extract_json(response.content)
-        strategy = StrategyDecision.model_validate(data)
+        raw_list = _extract_json(response.content)
+        if isinstance(raw_list, dict) and "hypotheses" in raw_list:
+            raw_list = raw_list["hypotheses"]
+        hypotheses = [StrategyHypothesis.model_validate(item) for item in raw_list]
+        if hypotheses:
+            return hypotheses
     except Exception:
-        # Fallback to a clean strategic decision
-        strategy = StrategyDecision(
-            topic="Ethics GS4 Case Study Framework: 3 Golden Rules for 20+ Marks Jump",
-            content_bucket="strategy",
+        pass
+
+    # Fallback diverse branches
+    return [
+        StrategyHypothesis(
+            hypothesis_id=1,
+            topic="CSAT Error Elimination: The 3-Pass Rule to Guarantee 80+ Marks",
+            content_bucket="study_tips",
             hook_style="shock_stat",
             format="talking_head",
-            tone="Urgent, highly actionable and authoritative",
-            reasoning="Ethics offers maximum marks leverage in Mains with minimal competition.",
-            confidence=0.92,
-            avoid_topics=state.get("fatigued_topics", []),
-            avoid_formats=["voiceover_montage"],
+            tone="Urgent and tactical",
+            rationale="High search interest and consistent fear-driven engagement in Prelims prep.",
+            confidence=0.91,
+        ),
+        StrategyHypothesis(
+            hypothesis_id=2,
+            topic="From 3 Prelims Failures to AIR 42: The 1 Mindset Shift",
+            content_bucket="motivation",
+            hook_style="personal_story",
+            format="talking_head",
+            tone="Empathetic, raw and inspiring",
+            rationale="High save and share rate from aspirant emotional vulnerability.",
+            confidence=0.88,
+        ),
+        StrategyHypothesis(
+            hypothesis_id=3,
+            topic="UPSC Mains GS4 Ethics: How Case Studies Decide Your Cadre",
+            content_bucket="strategy",
+            hook_style="myth_bust",
+            format="text_overlay",
+            tone="Strategic and high conviction",
+            rationale="High marks leverage with low competition.",
+            confidence=0.89,
+        ),
+    ]
+
+@traceable(name="Strategy ToT: Level 2 Pruning & Selection", run_type="tool")
+def _prune_and_select_champion(
+    hypotheses: List[StrategyHypothesis],
+    store: JsonStore,
+    engine: GuardrailsEngine,
+    fatigued_topics: List[str],
+) -> StrategyDecision:
+    """Evaluates all candidate branches against guardrails, prunes violating branches, and selects the winner."""
+    valid_candidates: List[tuple[StrategyHypothesis, float]] = []
+
+    for hyp in hypotheses:
+        decision_candidate = StrategyDecision(
+            topic=hyp.topic,
+            content_bucket=hyp.content_bucket,
+            hook_style=hyp.hook_style,
+            format=hyp.format,
+            tone=hyp.tone,
+            reasoning=hyp.rationale,
+            confidence=hyp.confidence,
+            avoid_topics=fatigued_topics,
+            avoid_formats=[],
+        )
+        # Check against guardrails
+        res = engine.run_all_checks(decision_candidate, store, retry_count=0)
+        if res.passed and not res.violations:
+            valid_candidates.append((hyp, hyp.confidence))
+
+    # If any branches passed guardrails cleanly, pick the highest confidence
+    if valid_candidates:
+        valid_candidates.sort(key=lambda x: x[1], reverse=True)
+        winner = valid_candidates[0][0]
+        return StrategyDecision(
+            topic=winner.topic,
+            content_bucket=winner.content_bucket,
+            hook_style=winner.hook_style,
+            format=winner.format,
+            tone=winner.tone,
+            reasoning=f"[ToT Champion selected from {len(hypotheses)} branches]: {winner.rationale}",
+            confidence=winner.confidence,
+            avoid_topics=fatigued_topics,
+            avoid_formats=[],
         )
 
+    # If all 3 branches had minor rule overlap, pick the one with highest confidence
+    hypotheses.sort(key=lambda x: x.confidence, reverse=True)
+    fallback_winner = hypotheses[0]
+    return StrategyDecision(
+        topic=fallback_winner.topic,
+        content_bucket=fallback_winner.content_bucket,
+        hook_style=fallback_winner.hook_style,
+        format=fallback_winner.format,
+        tone=fallback_winner.tone,
+        reasoning=f"[ToT Candidate]: {fallback_winner.rationale}",
+        confidence=fallback_winner.confidence,
+        avoid_topics=fatigued_topics,
+        avoid_formats=[],
+    )
+
+@traceable(name="Strategy Agent (ToT)", run_type="chain")
+async def strategy_node(state: AgentState) -> Dict[str, Any]:
+    """Strategy Agent with Tree of Thoughts: Branches 3 hypotheses, prunes bad angles, and picks champion."""
+    store = JsonStore()
+    engine = GuardrailsEngine()
+    guardrail_result = state.get("guardrail_result")
+    retry_count = state.get("guardrail_retry_count", 0)
+
+    guardrail_feedback = ""
+    if guardrail_result and not guardrail_result.get("passed", True):
+        violations = guardrail_result.get("violations", [])
+        guardrail_feedback = (
+            f"\nATTENTION - PREVIOUS PROPOSAL REJECTED BY GUARDRAILS (Attempt {retry_count}):\n"
+            + "\n".join(f"- {v}" for v in violations)
+            + "\nYou MUST explore DIVERGENT angles in all 3 branches that avoid these violations completely!\n"
+        )
+
+    # Level 1: Generate 3 diverse strategy branches
+    hypotheses = await _generate_strategy_branches(state, guardrail_feedback)
+
+    # Level 2: Deterministic guardrail pruning & champion selection
+    fatigued_topics = state.get("fatigued_topics", [])
+    champion_strategy = _prune_and_select_champion(hypotheses, store, engine, fatigued_topics)
+
     return {
-        "strategy": strategy.model_dump(),
+        "strategy": champion_strategy.model_dump(),
     }

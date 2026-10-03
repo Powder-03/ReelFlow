@@ -33,6 +33,36 @@ class ReelScript(BaseModel):
     tone: str
     topic: str
 
+# --- Tree of Thoughts (ToT) Schemas ---
+
+class HookCandidate(BaseModel):
+    """Candidate hook branch generated during ToT Level 1 exploration."""
+    hook_id: int
+    hook_style: str             # shock_stat, personal_story, myth_bust, challenge, question
+    text: str                   # Spoken hook (~18-23 words)
+    visual_cue: str             # [Visual cue description]
+    word_count: int
+
+class HookEvaluationResult(BaseModel):
+    """Heuristic scoring of candidate hook in ToT Level 2."""
+    hook_id: int
+    curiosity_score: float      # 0.0 to 10.0
+    scroll_stop_score: float    # 0.0 to 10.0
+    word_count_valid: bool      # True if 15 <= word_count <= 25
+    overall_hook_score: float   # 0.0 to 10.0
+    critique: str
+
+class StrategyHypothesis(BaseModel):
+    """Candidate strategy branch in Strategy ToT."""
+    hypothesis_id: int
+    topic: str
+    content_bucket: str
+    hook_style: str
+    format: str
+    tone: str
+    rationale: str
+    confidence: float = 0.85
+
 class GEvalScore(BaseModel):
     """Individual G-Eval metric result."""
     metric_name: str             # e.g., "hook_strength"
