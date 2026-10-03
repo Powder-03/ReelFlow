@@ -35,8 +35,10 @@ def route_after_critic(state: AgentState) -> str:
     
     return "feedback"
 
-def build_growth_brain_graph() -> StateGraph:
-    """Compiles the LangGraph Multi-Agent Instagram Growth Brain workflow."""
+from langgraph.checkpoint.memory import MemorySaver
+
+def build_growth_brain_graph():
+    """Compiles the LangGraph Multi-Agent Instagram Growth Brain workflow with thread checkpointing."""
     workflow = StateGraph(AgentState)
 
     # Register all agent and deterministic nodes
@@ -78,4 +80,5 @@ def build_growth_brain_graph() -> StateGraph:
 
     workflow.add_edge("feedback", END)
 
-    return workflow.compile()
+    checkpointer = MemorySaver()
+    return workflow.compile(checkpointer=checkpointer)

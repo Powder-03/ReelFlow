@@ -34,5 +34,32 @@
     "saves": 12000,
     "shares": 5000,
     "comments": 400
+  },
+  {
+    "script_id": "test_script_42",
+    "logged_at": "2026-10-03T14:12:49.164377+00:00",
+    "engagement_rate": 7.8,
+    "views": 150000,
+    "saves": 12000,
+    "shares": 5000,
+    "comments": 400
+  },
+  {
+    "script_id": "test_script_42",
+    "logged_at": "2026-10-03T14:23:04.133541+00:00",
+    "engagement_rate": 7.8,
+    "views": 150000,
+    "saves": 12000,
+    "shares": 5000,
+    "comments": 400
+  },
+  {
+    "script_id": "test_script_42",
+    "logged_at": "2026-10-03T14:24:59.152751+00:00",
+    "engagement_rate": 7.8,
+    "views": 150000,
+    "saves": 12000,
+    "shares": 5000,
+    "comments": 400
   }
 ]

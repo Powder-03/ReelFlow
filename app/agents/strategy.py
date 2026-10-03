@@ -72,7 +72,6 @@ Return ONLY valid JSON matching a list of 3 StrategyHypothesis objects:
 ]
 """
 
-@traceable(name="Strategy ToT: Level 1 Branching", run_type="chain")
 async def _generate_strategy_branches(state: AgentState, guardrail_feedback: str) -> List[StrategyHypothesis]:
     """Generates 3 divergent strategy hypotheses in parallel thought trees."""
     llm = get_llm(temperature=0.7)
@@ -134,7 +133,6 @@ async def _generate_strategy_branches(state: AgentState, guardrail_feedback: str
         ),
     ]
 
-@traceable(name="Strategy ToT: Level 2 Pruning & Selection", run_type="tool")
 def _prune_and_select_champion(
     hypotheses: List[StrategyHypothesis],
     store: JsonStore,

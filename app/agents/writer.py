@@ -144,7 +144,6 @@ Return ONLY valid JSON matching ReelScript schema:
 }}
 """
 
-@traceable(name="Writer ToT: Level 1 - Branch 3 Hooks", run_type="chain")
 async def _generate_hook_tree(strategy: Dict[str, Any], rewrite_instructions: str) -> List[HookCandidate]:
     """Generates 3 competing hook candidates exploring different psychological angles."""
     llm = get_llm(temperature=0.75)
@@ -201,7 +200,6 @@ async def _generate_hook_tree(strategy: Dict[str, Any], rewrite_instructions: st
         ),
     ]
 
-@traceable(name="Writer ToT: Level 2 - Evaluate & Prune Hooks", run_type="tool")
 def _evaluate_and_prune_hooks(candidates: List[HookCandidate]) -> tuple[HookCandidate, List[HookEvaluationResult]]:
     """Heuristically evaluates hook candidates for scroll-stopping power and word count discipline.
     Prunes the weaker hooks and selects the champion.
@@ -238,7 +236,6 @@ def _evaluate_and_prune_hooks(candidates: List[HookCandidate]) -> tuple[HookCand
     champion_hook = sorted_pairs[0][0]
     return champion_hook, evaluations
 
-@traceable(name="Writer ToT: Level 3 - Expand Body Arc", run_type="chain")
 async def _expand_champion_arc(
     champion_hook: HookCandidate,
     strategy: Dict[str, Any],
@@ -311,7 +308,6 @@ async def _expand_champion_arc(
             topic=strategy["topic"],
         )
 
-@traceable(name="Writer ToT: Level 4 - Segment Pacing Validation & Backtrack", run_type="tool")
 def _validate_and_backtrack_pacing(script: ReelScript) -> ReelScript:
     """Validates segment word counts and adjusts any segments that drift outside [15, 25] bounds."""
     updated_segments: List[ScriptSegment] = []

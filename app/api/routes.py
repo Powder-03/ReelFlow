@@ -1,3 +1,4 @@
+import uuid
 from fastapi import APIRouter, HTTPException
 from typing import List, Dict, Any, Optional
 from langsmith import traceable
@@ -55,7 +56,14 @@ async def generate_reel_pipeline(request: GenerateRequest):
             "all_evaluations": [],
         }
 
-        final_state = await graph.ainvoke(initial_state)
+        thread_id = f"reel-{uuid.uuid4().hex[:12]}"
+        config = {
+            "configurable": {"thread_id": thread_id},
+            "run_name": f"ReelFlow Pipeline: {request.account_handle}",
+            "tags": ["reel-flow", request.account_handle],
+        }
+
+        final_state = await graph.ainvoke(initial_state, config=config)
 
         approved_script_dict = final_state.get("approved_script") or final_state.get("best_script")
         evaluation_dict = final_state.get("evaluation")

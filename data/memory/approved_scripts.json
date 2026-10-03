@@ -1,1 +1,131 @@
-[]
+[
+  {
+    "saved_at": "2026-10-03T14:27:31.424787+00:00",
+    "script": {
+      "title": "COP31: India's Climate Dilemma & Your UPSC Edge.",
+      "hook": "India ka climate future? 2030 tak emissions 50% up. Yeh COP31 data miss kiya, toh UPSC mein game over. Jaano critical reality!",
+      "segments": [
+        {
+          "segment_id": 1,
+          "type": "hook",
+          "text": "India ka climate future? 2030 tak emissions 50% up. Yeh COP31 data miss kiya, toh UPSC mein game over. Jaano critical reality!",
+          "visual_cue": "[Rapidly flashing climate data, red graph spiking up, urgent siren sound]",
+          "estimated_seconds": 5.0
+        },
+        {
+          "segment_id": 2,
+          "type": "build_up",
+          "text": "Yeh sirf environmental issue nahi, tumhare UPSC mains ka core topic hai. Data analysis miss kiya, toh selection chance zero!",
+          "visual_cue": "[UPSC exam hall stress, ticking clock, overlay of 'FAIL' stamp on an answer sheet]",
+          "estimated_seconds": 6.0
+        },
+        {
+          "segment_id": 3,
+          "type": "core_value",
+          "text": "COP31 mein India ka stance, challenges, aur solutions ko deep dive karo. Yeh framework UPSC answers mein extra marks dega.",
+          "visual_cue": "[Split screen: World map with India highlighted, then a whiteboard with 'India's COP31 Strategy' flow chart]",
+          "estimated_seconds": 7.0
+        },
+        {
+          "segment_id": 4,
+          "type": "emotional_peak",
+          "text": "Socho, tumhara future aur desh ka future, dono iss climate crisis se linked. Sirf padho mat, samjho aur act karo!",
+          "visual_cue": "[Montage: Drought-stricken fields, then a student studying intently, then a clean energy future graphic]",
+          "estimated_seconds": 6.0
+        },
+        {
+          "segment_id": 5,
+          "type": "cta",
+          "text": "Iss topic par detailed analysis chahiye? Comment 'COP31' aur follow karo for more UPSC-centric climate insights. Don't miss out!",
+          "visual_cue": "[Finger tapping comment icon, then follow button, then a PDF download icon]",
+          "estimated_seconds": 5.0
+        }
+      ],
+      "cta": "Iss topic par detailed analysis chahiye? Comment 'COP31' aur follow karo for more UPSC-centric climate insights. Don't miss out!",
+      "content_bucket": "current_affairs",
+      "hook_style": "shock_stat",
+      "format": "voiceover_montage",
+      "tone": "Analytical, critical, urgent, informed debate",
+      "topic": "COP31: India's Climate Dilemma & Your UPSC Edge."
+    },
+    "evaluation": {
+      "hook_strength": {
+        "metric_name": "Hook Strength",
+        "score": 1.0,
+        "score_10": 10.0,
+        "reason": "The hook effectively creates immediate curiosity and emotional pull with the alarming statistic '2030 tak emissions 50% up' and the high-stakes consequence 'UPSC mein game over'. It uses a direct question and a bold claim, avoiding generic openings, and strongly conveys a sense of missing out on critical information for the target audience.",
+        "evaluation_steps": [
+          "Read only the 'hook' field of the script",
+          "Check if it creates immediate curiosity, shock, or emotional pull",
+          "Assess whether a viewer would stop scrolling within 2 seconds",
+          "Penalize generic openings like 'Aaj hum baat karenge...' or 'Hey guys'",
+          "Reward specific numbers, bold claims, counter-intuitive statements, or direct questions",
+          "A perfect hook makes the viewer feel they'll miss out if they scroll past"
+        ]
+      },
+      "emotional_arc": {
+        "metric_name": "Emotional Arc",
+        "score": 0.9,
+        "score_10": 9.0,
+        "reason": "The script effectively establishes a strong emotional hook with urgency and fear ('game over'). It then builds on this fear by linking it to UPSC success, introduces a pivot with a solution-oriented approach, and peaks with a powerful call to action connecting personal and national future. The emotional trajectory is dynamic and ends on a higher, more empowering note than it began, avoiding a flat emotional line.",
+        "evaluation_steps": [
+          "Read all segments of the script in order",
+          "Identify the emotional starting point (hook emotion)",
+          "Track how emotion shifts across segments: does it build, dip, then peak?",
+          "Check for at least one emotional pivot (surprise, realization, or empathy moment)",
+          "Penalize flat emotional trajectories where every segment has the same energy",
+          "Reward scripts that end on a higher emotional note than they started"
+        ]
+      },
+      "pacing": {
+        "metric_name": "Pacing",
+        "score": 0.8,
+        "score_10": 8.0,
+        "reason": "The script effectively builds urgency and relevance, ensuring the CTA feels earned and the pacing is appropriate. The rhythmic consistency is natural for the target audience. However, the word count for Segment 1 (29 words) significantly exceeds the 15-25 word guideline, and other segments are consistently at the upper end of this range, indicating a slight lack of conciseness.",
+        "evaluation_steps": [
+          "Count words in each segment \u2014 each should be approximately 18-23 words",
+          "Segments significantly outside 15-25 words should be penalized",
+          "Check that information density is even \u2014 no segment is overloaded while others are filler",
+          "Verify the script doesn't rush the setup or drag the middle",
+          "The CTA should feel earned, not abrupt",
+          "Reward rhythmic consistency that would sound natural when spoken aloud"
+        ]
+      },
+      "originality": {
+        "metric_name": "Originality",
+        "score": 0.9,
+        "score_10": 9.0,
+        "reason": "The script effectively creates a fresh angle by directly linking COP31 data and India's climate dilemma to UPSC exam success and failure, which is not a common take on climate topics. The hook, 'Yeh COP31 data miss kiya, toh UPSC mein game over,' offers a unique framing that differentiates it from typical content. This novel comparison between climate data and exam performance would likely make a viewer share it due to its specific relevance to UPSC aspirants, despite the use of a somewhat predictable content structure.",
+        "evaluation_steps": [
+          "Assess whether the angle or perspective is fresh \u2014 not a common take on this topic",
+          "Check if the hook offers a unique framing that differentiates from typical content",
+          "Penalize clich\u00e9 phrases, overused Instagram tropes, and predictable structures",
+          "Reward unexpected analogies, novel comparisons, or unconventional storytelling",
+          "Consider: would this script make a viewer share it because they haven't seen this take before?"
+        ]
+      },
+      "strategic_alignment": {
+        "metric_name": "Strategic Alignment",
+        "score": 0.7,
+        "score_10": 7.0,
+        "reason": "The script aligns well with the specified topic, content bucket, tone (Analytical, critical, urgent, informed debate), and format cues for a voiceover montage. It also avoids drifting into other content buckets. However, the 'hook_style' in the output is 'shock_stat', which deviates from the strategy's requirement of a 'question' hook.",
+        "evaluation_steps": [
+          "The chosen strategy is: Topic: COP31: India's Climate Dilemma & Your UPSC Edge., Bucket: current_affairs, Hook: question, Format: voiceover_montage, Tone: Analytical, critical, urgent, informed debate",
+          "Verify the script matches the specified content bucket and topic",
+          "Check that the hook style matches the strategy's hook_style choice",
+          "Verify the tone matches \u2014 if strategy says 'high energy', the script shouldn't be mellow",
+          "Check the format cues align (e.g., if talking_head, there should be direct-to-camera cues)",
+          "Penalize scripts that drift into a different content bucket mid-way"
+        ]
+      },
+      "overall_score": 0.865,
+      "overall_score_10": 8.65,
+      "qualitative_feedback": "Hook Strength: 10.0/10 | Emotional Arc: 9.0/10 | Pacing: 8.0/10 | Originality: 9.0/10 | Strategic Alignment: 7.0/10",
+      "pass_threshold": true,
+      "rewrite_suggestions": [
+        "Pacing (8.0/10): The script effectively builds urgency and relevance, ensuring the CTA feels earned and the pacing is appropriate. The rhythmic consistency is natural for the target audience. However, the word count for Segment 1 (29 words) significantly exceeds the 15-25 word guideline, and other segments are consistently at the upper end of this range, indicating a slight lack of conciseness.",
+        "Strategic Alignment (7.0/10): The script aligns well with the specified topic, content bucket, tone (Analytical, critical, urgent, informed debate), and format cues for a voiceover montage. It also avoids drifting into other content buckets. However, the 'hook_style' in the output is 'shock_stat', which deviates from the strategy's requirement of a 'question' hook."
+      ]
+    }
+  }
+]
