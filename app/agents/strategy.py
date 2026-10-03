@@ -1,6 +1,7 @@
 import json
 import re
 from typing import Dict, Any
+from langsmith import traceable
 
 from app.agents.state import AgentState
 from app.core.llm import get_llm
@@ -62,6 +63,7 @@ Return ONLY valid JSON matching StrategyDecision schema:
 }}
 """
 
+@traceable(name="Strategy Agent", run_type="chain")
 async def strategy_node(state: AgentState) -> Dict[str, Any]:
     """Strategy Agent: Formulates the next content move based on Intelligence and Memory."""
     guardrail_result = state.get("guardrail_result")

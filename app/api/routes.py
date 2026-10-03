@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from typing import List, Dict, Any, Optional
+from langsmith import traceable
 
 from app.models.schemas import (
     GenerateRequest,
@@ -35,6 +36,12 @@ async def health_check():
     }
 
 @router.post("/generate", response_model=GenerateResponse)
+@traceable(
+    name="Generate Reel Pipeline",
+    run_type="chain",
+    tags=["reel-flow", "upsc"],
+    metadata={"service": "growth-brain", "model": settings.GEMINI_MODEL}
+)
 async def generate_reel_pipeline(request: GenerateRequest):
     """Run full Multi-Agent Instagram Growth Brain workflow."""
     try:
@@ -78,6 +85,12 @@ async def generate_reel_pipeline(request: GenerateRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/generate/strategy-only", response_model=StrategyDecision)
+@traceable(
+    name="Strategy Formulation Flow",
+    run_type="chain",
+    tags=["strategy-only", "upsc"],
+    metadata={"service": "growth-brain", "model": settings.GEMINI_MODEL}
+)
 async def generate_strategy_only(request: GenerateRequest):
     """Run Intelligence + Memory + Strategy + Guardrails only."""
     try:

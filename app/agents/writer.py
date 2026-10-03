@@ -1,6 +1,7 @@
 import json
 import re
 from typing import Dict, Any
+from langsmith import traceable
 
 from app.agents.state import AgentState
 from app.core.llm import get_llm
@@ -92,6 +93,7 @@ Return ONLY valid JSON matching ReelScript schema:
 }}
 """
 
+@traceable(name="Writer Agent", run_type="chain")
 async def writer_node(state: AgentState) -> Dict[str, Any]:
     """Writer Agent: Generates viral Hinglish reel scripts following the strategy."""
     strategy = state["strategy"]

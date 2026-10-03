@@ -1,6 +1,7 @@
 import json
 import re
 from typing import Dict, Any, List
+from langsmith import traceable
 
 from app.agents.state import AgentState
 from app.core.llm import get_llm
@@ -54,6 +55,7 @@ Return ONLY valid JSON:
 }}
 """
 
+@traceable(name="Critic Agent (Hybrid)", run_type="chain")
 async def critic_node(state: AgentState) -> Dict[str, Any]:
     """Critic Agent: Evaluates script using parallel G-Eval metrics and provides qualitative coaching."""
     current_script = state["current_script"]

@@ -1,9 +1,11 @@
 from typing import Dict, Any
+from langsmith import traceable
 from app.agents.state import AgentState
 from app.guardrails.engine import GuardrailsEngine
 from app.models.schemas import StrategyDecision
 from app.store.json_store import JsonStore
 
+@traceable(name="Guardrails Node", run_type="tool")
 async def guardrails_node(state: AgentState) -> Dict[str, Any]:
     """Guardrails node: Validates strategy against repetition, fatigue, and cooldowns.
     

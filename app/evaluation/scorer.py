@@ -1,5 +1,6 @@
 import asyncio
 from typing import Dict, Tuple
+from langsmith import traceable
 from deepeval.test_case import LLMTestCase
 from app.evaluation.metrics import (
     create_hook_strength_metric,
@@ -22,6 +23,7 @@ METRIC_WEIGHTS: Dict[str, float] = {
 
 PASS_THRESHOLD: float = settings.PASS_THRESHOLD  # 0.85 (8.5/10)
 
+@traceable(name="G-Eval Metric Evaluation", run_type="tool")
 async def _measure_metric(name: str, metric, test_case: LLMTestCase) -> Tuple[str, GEvalScore]:
     """Run a single G-Eval metric asynchronously."""
     await metric.a_measure(test_case)
@@ -36,6 +38,7 @@ async def _measure_metric(name: str, metric, test_case: LLMTestCase) -> Tuple[st
         evaluation_steps=list(metric.evaluation_steps or []),
     )
 
+@traceable(name="G-Eval Suite (Parallel 5x)", run_type="chain")
 async def evaluate_script(
     script_text: str,
     strategy_context: str,

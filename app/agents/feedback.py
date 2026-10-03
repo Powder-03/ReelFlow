@@ -1,6 +1,7 @@
 import json
 import re
 from typing import Dict, Any
+from langsmith import traceable
 
 from app.agents.state import AgentState
 from app.core.llm import get_llm
@@ -42,6 +43,7 @@ Return ONLY valid JSON:
 }}
 """
 
+@traceable(name="Feedback & Continuous Learning", run_type="chain")
 async def feedback_node(state: AgentState) -> Dict[str, Any]:
     """Feedback Agent: Learns from approved content and updates performance memory."""
     store = JsonStore()

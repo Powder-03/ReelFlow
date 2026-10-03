@@ -1,6 +1,7 @@
 import re
 from datetime import datetime, date, timedelta, timezone
 from typing import List, Optional, Set
+from langsmith import traceable
 from app.models.schemas import StrategyDecision, GuardrailResult
 from app.store.json_store import JsonStore
 from app.core.config import settings
@@ -68,6 +69,7 @@ class GuardrailsEngine:
         words = [w for w in text.split() if not (w.startswith("[") and w.endswith("]"))]
         return min_words <= len(words) <= max_words
 
+    @traceable(name="Deterministic Guardrail Engine", run_type="tool")
     def run_all_checks(
         self,
         strategy: StrategyDecision,

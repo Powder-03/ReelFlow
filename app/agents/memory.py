@@ -1,6 +1,7 @@
 import json
 import re
 from typing import Dict, Any
+from langsmith import traceable
 
 from app.agents.state import AgentState
 from app.core.llm import get_llm
@@ -52,6 +53,7 @@ Return ONLY valid JSON matching this structure:
 }}
 """
 
+@traceable(name="Memory Agent", run_type="chain")
 async def memory_node(state: AgentState) -> Dict[str, Any]:
     """Memory Agent: Retrieves historical performance patterns and synthesizes memory insights."""
     store = JsonStore()

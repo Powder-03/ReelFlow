@@ -3,6 +3,7 @@ import re
 from datetime import datetime, timezone
 from typing import Dict, Any
 
+from langsmith import traceable
 from app.agents.state import AgentState
 from app.core.llm import get_llm
 from app.store.json_store import JsonStore
@@ -56,6 +57,7 @@ Return ONLY valid JSON matching this structure:
 }}
 """
 
+@traceable(name="Intelligence Agent", run_type="chain")
 async def intelligence_node(state: AgentState) -> Dict[str, Any]:
     """Intelligence Agent: Analyzes account performance, events calendar, and niche trends."""
     store = JsonStore()
