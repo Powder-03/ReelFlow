@@ -283,3 +283,41 @@ class JsonStore:
             "source_post_id": best.post_id,
             "engagement_rate": best.engagement_rate,
         }
+
+    def log_guardrail_audit(
+        self,
+        strategy_topic: str,
+        hook_style: str,
+        passed: bool,
+        violations: List[str],
+        reasoning: str,
+        confidence: float,
+        hook_changed: bool = False,
+        original_hook: Optional[str] = None,
+        rotated_hook: Optional[str] = None,
+        auto_picked: bool = False,
+    ) -> Dict[str, Any]:
+        """Saves a detailed guardrail audit log to persistent memory."""
+        path = self.memory_dir / "guardrail_audit_log.json"
+        logs = self._read_json(path, default=[])
+        record = {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "strategy_topic": strategy_topic,
+            "hook_style": hook_style,
+            "passed": passed,
+            "violations": violations,
+            "reasoning": reasoning,
+            "confidence": confidence,
+            "hook_changed": hook_changed,
+            "original_hook": original_hook,
+            "rotated_hook": rotated_hook,
+            "auto_picked": auto_picked,
+        }
+        logs.append(record)
+        self._write_json(path, logs)
+        return record
+
+    def get_guardrail_audit_logs(self, limit: int = 50) -> List[Dict[str, Any]]:
+        path = self.memory_dir / "guardrail_audit_log.json"
+        logs = self._read_json(path, default=[])
+        return logs[-limit:]

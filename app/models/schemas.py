@@ -103,6 +103,9 @@ class GuardrailResult(BaseModel):
     retry_count: int = 0
     auto_picked: bool = False
     auto_picked_strategy: Optional[Dict[str, Any]] = None
+    hook_changed: bool = False
+    original_hook: Optional[str] = None
+    rotated_hook: Optional[str] = None
 
 class AccountProfile(BaseModel):
     handle: str

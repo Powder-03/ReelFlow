@@ -140,3 +140,60 @@ def test_guardrails_bounded_fallback_at_max_retries(store_and_engine):
     assert result.auto_picked
     assert result.auto_picked_strategy is not None
     assert "FALLBACK_TRIGGERED" in result.violations[-1]
+
+def test_hook_rotation_and_audit_logging(store_and_engine):
+    """Verifies that consecutive hook fatigue triggers hook rotation,
+    logs the change, and persists reasoning and confidence in audit trail.
+    """
+    store, engine = store_and_engine
+    # Recent 2 posts used 'shock_stat'
+    consecutive_hook_strategy = StrategyDecision(
+        topic="Mains Essay Scoring Framework",
+        content_bucket="strategy",
+        hook_style="shock_stat",  # Overused
+        format="skit",
+        tone="Strategic and engaging",
+        reasoning="Shock statistics on essay mark differences create high urgency for aspirants.",
+        confidence=0.92,
+    )
+
+    result = engine.run_all_checks(consecutive_hook_strategy, store, retry_count=0)
+
+    # Assert violation caught
+    assert not result.passed
+    assert result.hook_changed
+    assert result.original_hook == "shock_stat"
+    assert result.rotated_hook in ["question", "personal_story", "myth_bust", "challenge"]
+    assert any("HOOK_FATIGUE" in v for v in result.violations)
+
+    # Verify audit log in persistent memory
+    audit_logs = store.get_guardrail_audit_logs(limit=10)
+    assert len(audit_logs) > 0
+    latest_log = audit_logs[-1]
+
+    # Verify reasoning and confidence are recorded
+    assert latest_log["strategy_topic"] == "Mains Essay Scoring Framework"
+    assert latest_log["reasoning"] == "Shock statistics on essay mark differences create high urgency for aspirants."
+    assert latest_log["confidence"] == 0.92
+    assert latest_log["hook_changed"] is True
+    assert latest_log["original_hook"] == "shock_stat"
+    assert latest_log["rotated_hook"] == result.rotated_hook
+
+def test_auto_rotate_hook_resolution(store_and_engine):
+    """Verifies that auto_rotate_hook switches to fresh hook and clears hook violation."""
+    store, engine = store_and_engine
+    strategy = StrategyDecision(
+        topic="Mains Ethics Case Study Framework",
+        content_bucket="strategy",
+        hook_style="shock_stat",  # Overused
+        format="skit",
+        tone="Strategic and engaging",
+        reasoning="High conviction ethical framework.",
+        confidence=0.88,
+    )
+
+    result = engine.run_all_checks(strategy, store, retry_count=0, auto_rotate_hook=True)
+    assert result.passed
+    assert result.hook_changed
+    assert strategy.hook_style != "shock_stat"
+    assert len(result.violations) == 0
