@@ -82,7 +82,7 @@ async def _generate_strategy_branches(state: AgentState, guardrail_feedback: str
         account_analysis=json.dumps(state.get("account_analysis", {}), indent=2),
         successful_hooks=json.dumps(state.get("successful_hooks", []), indent=2),
         successful_formats=json.dumps(state.get("successful_formats", []), indent=2),
-        fatigued_topics=json.dumps(state.get("fatigued_topics", []), indent=2),
+        fatigued_topics=json.dumps(state.get("fatigued_topics") or JsonStore().get_fatigued_topics(), indent=2),
         competitor_insights=json.dumps(state.get("competitor_insights", []), indent=2),
         content_request=state.get("content_request") or "None",
         guardrail_feedback=guardrail_feedback,
@@ -211,7 +211,7 @@ async def strategy_node(state: AgentState) -> Dict[str, Any]:
     hypotheses = await _generate_strategy_branches(state, guardrail_feedback)
 
     # Level 2: Deterministic guardrail pruning & champion selection
-    fatigued_topics = state.get("fatigued_topics", [])
+    fatigued_topics = state.get("fatigued_topics") or store.get_fatigued_topics()
     champion_strategy = _prune_and_select_champion(hypotheses, store, engine, fatigued_topics)
 
     return {

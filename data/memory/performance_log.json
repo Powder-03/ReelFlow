@@ -61,5 +61,32 @@
     "saves": 12000,
     "shares": 5000,
     "comments": 400
+  },
+  {
+    "script_id": "test_script_42",
+    "logged_at": "2026-10-04T08:14:21.446450+00:00",
+    "engagement_rate": 7.8,
+    "views": 150000,
+    "saves": 12000,
+    "shares": 5000,
+    "comments": 400
+  },
+  {
+    "script_id": "reel_the_5-step_upsc",
+    "logged_at": "2026-10-04T14:39:11.474474+00:00",
+    "views": 45000,
+    "saves": 310,
+    "shares": 120,
+    "comments": 45,
+    "engagement_rate": 1.2
+  },
+  {
+    "script_id": "reel_the_untold_trut",
+    "logged_at": "2026-10-04T14:41:29.052549+00:00",
+    "views": 45000,
+    "saves": 310,
+    "shares": 120,
+    "comments": 45,
+    "engagement_rate": 1.2
   }
 ]
