@@ -103,7 +103,6 @@ class JsonStore:
         posts = self.load_posts()
         # Sort by date descending
         posts = sorted(posts, key=lambda x: x.date, reverse=True)
-        # Filter by recent days if dates are present
         now = datetime.now(timezone.utc)
         cutoff = now - timedelta(days=days)
         recent = [
@@ -113,15 +112,57 @@ class JsonStore:
         ]
         if not recent and posts:
             recent = [p.topic for p in posts[:10]]
+
+        # Also incorporate newly generated & approved scripts from runtime memory
+        approved_path = self.memory_dir / "approved_scripts.json"
+        approved = self._read_json(approved_path, default=[])
+        for rec in reversed(approved):
+            script_data = rec.get("script", {})
+            topic = script_data.get("topic")
+            saved_at_str = rec.get("saved_at")
+            if topic:
+                if saved_at_str:
+                    try:
+                        saved_dt = datetime.fromisoformat(saved_at_str)
+                        if (saved_dt.tzinfo is None and saved_dt >= cutoff.replace(tzinfo=None)) or \
+                           (saved_dt.tzinfo is not None and saved_dt >= cutoff):
+                            if topic not in recent:
+                                recent.insert(0, topic)
+                    except Exception:
+                        if topic not in recent:
+                            recent.insert(0, topic)
+                else:
+                    if topic not in recent:
+                        recent.insert(0, topic)
         return recent
 
     def get_recent_hook_styles(self, count: int = 5) -> List[str]:
+        # Prepend hooks from newly approved scripts in runtime memory
+        approved_path = self.memory_dir / "approved_scripts.json"
+        approved = self._read_json(approved_path, default=[])
+        runtime_hooks = [
+            rec["script"]["hook_style"]
+            for rec in reversed(approved)
+            if "script" in rec and "hook_style" in rec["script"]
+        ]
         posts = sorted(self.load_posts(), key=lambda x: x.date, reverse=True)
-        return [p.hook_style for p in posts[:count]]
+        post_hooks = [p.hook_style for p in posts]
+        all_hooks = runtime_hooks + post_hooks
+        return all_hooks[:count]
 
     def get_recent_formats(self, count: int = 5) -> List[str]:
+        # Prepend formats from newly approved scripts in runtime memory
+        approved_path = self.memory_dir / "approved_scripts.json"
+        approved = self._read_json(approved_path, default=[])
+        runtime_formats = [
+            rec["script"]["format"]
+            for rec in reversed(approved)
+            if "script" in rec and "format" in rec["script"]
+        ]
         posts = sorted(self.load_posts(), key=lambda x: x.date, reverse=True)
-        return [p.format for p in posts[:count]]
+        post_formats = [p.format for p in posts]
+        all_formats = runtime_formats + post_formats
+        return all_formats[:count]
 
     def get_top_performing(self, metric: str = "engagement_rate", limit: int = 10) -> List[Post]:
         posts = self.load_posts()

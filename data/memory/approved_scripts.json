@@ -127,5 +127,133 @@
         "Strategic Alignment (7.0/10): The script aligns well with the specified topic, content bucket, tone (Analytical, critical, urgent, informed debate), and format cues for a voiceover montage. It also avoids drifting into other content buckets. However, the 'hook_style' in the output is 'shock_stat', which deviates from the strategy's requirement of a 'question' hook."
       ]
     }
+  },
+  {
+    "saved_at": "2026-10-04T17:16:58.526454+00:00",
+    "script": {
+      "title": "CSAT Showdown: Why You're Failing Maths OR RC (The Shocking Truth & YOUR Strategy)",
+      "hook": "Sirf 30% log CSAT clear karte hain. Kya aapki Maths ya RC bhi aapko us 70% mein rakh rahi hai?",
+      "segments": [
+        {
+          "segment_id": 1,
+          "type": "hook",
+          "text": "Sirf 30% log CSAT clear karte hain. Kya aapki Maths ya RC bhi aapko us 70% mein rakh rahi hai?",
+          "visual_cue": "[Fast camera zoom, red warning text overlay: \"70% FAIL\"]",
+          "estimated_seconds": 5.0
+        },
+        {
+          "segment_id": 2,
+          "type": "build_up",
+          "text": "Yeh sirf CSAT ka exam nahi, aapke UPSC dream ka gatekeeper hai. Ek galti, aur poora saal waste! Don't let it happen.",
+          "visual_cue": "[Student looking stressed at books, calendar quickly flipping, then a red X over a UPSC logo]",
+          "estimated_seconds": 6.0
+        },
+        {
+          "segment_id": 3,
+          "type": "core_value",
+          "text": "Problem Maths mein hai ya RC mein? Pehle identify karo. Ek ko apna weapon banao, dusre ko bas clear karo. Smart strategy!",
+          "visual_cue": "[Split screen: \"MATHS?\" vs \"RC?\", then a magnifying glass zooming in on one, then a checkmark on one and a smaller checkmark on the other]",
+          "estimated_seconds": 7.0
+        },
+        {
+          "segment_id": 4,
+          "type": "emotional_peak",
+          "text": "Yeh soch kar mat ruko ki dono difficult hain. Ek mein master bano, aur CSAT tumhara hai. Victory is yours!",
+          "visual_cue": "[Lightbulb moment above a student's head, then a confident smile, finally a hand smashing a \"CSAT\" block]",
+          "estimated_seconds": 6.0
+        },
+        {
+          "segment_id": 5,
+          "type": "cta",
+          "text": "Apna weak area comment karo! Humari special CSAT strategy guide free mein download karo. Link in bio. Abhi clear karo!",
+          "visual_cue": "[Arrow pointing down to comment section, then an animated \"LINK IN BIO\" button, finally a triumphant student]",
+          "estimated_seconds": 5.0
+        }
+      ],
+      "cta": "Apna weak area comment karo! Humari special CSAT strategy guide free mein download karo. Link in bio. Abhi clear karo!",
+      "content_bucket": "strategy",
+      "hook_style": "shock_stat",
+      "format": "voiceover_montage",
+      "tone": "Urgent, revelatory, empowering",
+      "topic": "CSAT Showdown: Why You're Failing Maths OR RC (The Shocking Truth & YOUR Strategy)"
+    },
+    "evaluation": {
+      "hook_strength": {
+        "metric_name": "Hook Strength",
+        "score": 1.0,
+        "score_10": 10.0,
+        "reason": "The hook 'Sirf 30% log CSAT clear karte hain. Kya aapki Maths ya RC bhi aapko us 70% mein rakh rahi hai?' is highly effective. It uses a specific, shocking statistic (30% clear, 70% fail) and a direct, emotionally charged question to immediately grab attention and create curiosity, making the viewer feel they might miss out if they scroll past. It avoids generic openings and strongly aligns with all positive evaluation criteria.",
+        "evaluation_steps": [
+          "Read only the 'hook' field of the script",
+          "Check if it creates immediate curiosity, shock, or emotional pull",
+          "Assess whether a viewer would stop scrolling within 2 seconds",
+          "Penalize generic openings like 'Aaj hum baat karenge...' or 'Hey guys'",
+          "Reward specific numbers, bold claims, counter-intuitive statements, or direct questions",
+          "A perfect hook makes the viewer feel they'll miss out if they scroll past"
+        ]
+      },
+      "emotional_arc": {
+        "metric_name": "Emotional Arc",
+        "score": 1.0,
+        "score_10": 10.0,
+        "reason": "The script effectively establishes a strong emotional hook of fear and urgency in segment 1 ('70% FAIL'). It then builds on this anxiety in segment 2, before introducing a clear emotional pivot in segment 3 by offering a 'Smart strategy' to identify and tackle the problem. This leads to an empowering emotional peak in segment 4 ('Victory is yours!'), and concludes on a higher, action-oriented emotional note than it started, avoiding a flat trajectory.",
+        "evaluation_steps": [
+          "Read all segments of the script in order",
+          "Identify the emotional starting point (hook emotion)",
+          "Track how emotion shifts across segments: does it build, dip, then peak?",
+          "Check for at least one emotional pivot (surprise, realization, or empathy moment)",
+          "Penalize flat emotional trajectories where every segment has the same energy",
+          "Reward scripts that end on a higher emotional note than they started"
+        ]
+      },
+      "pacing": {
+        "metric_name": "Pacing",
+        "score": 0.9,
+        "score_10": 9.0,
+        "reason": "The script demonstrates strong alignment with the evaluation steps. Segment word counts are mostly within the 18-23 word target or just slightly above, without being significantly outside the 15-25 word range. Information density is consistently high across all segments, avoiding filler. The pacing is effective, with a quick setup and a well-structured middle. The CTA feels earned and flows naturally from the preceding content. The rhythmic consistency of the Hindi phrases would sound natural and impactful when spoken aloud, fitting the urgent and empowering tone.",
+        "evaluation_steps": [
+          "Count words in each segment \u2014 each should be approximately 18-23 words",
+          "Segments significantly outside 15-25 words should be penalized",
+          "Check that information density is even \u2014 no segment is overloaded while others are filler",
+          "Verify the script doesn't rush the setup or drag the middle",
+          "The CTA should feel earned, not abrupt",
+          "Reward rhythmic consistency that would sound natural when spoken aloud"
+        ]
+      },
+      "originality": {
+        "metric_name": "Originality",
+        "score": 0.3,
+        "score_10": 3.0,
+        "reason": "The content uses a common problem-solution approach for CSAT, which is not a fresh angle. The hook, while effective, uses a shock statistic and direct question that is a typical framing rather than unique. It employs several clich\u00e9 phrases like 'Shocking Truth' and 'Victory is yours!', and the visual cues described are overused tropes for short-form content. There are no unexpected analogies or unconventional storytelling elements, making it unlikely to be shared for a novel take.",
+        "evaluation_steps": [
+          "Assess whether the angle or perspective is fresh \u2014 not a common take on this topic",
+          "Check if the hook offers a unique framing that differentiates from typical content",
+          "Penalize clich\u00e9 phrases, overused Instagram tropes, and predictable structures",
+          "Reward unexpected analogies, novel comparisons, or unconventional storytelling",
+          "Consider: would this script make a viewer share it because they haven't seen this take before?"
+        ]
+      },
+      "strategic_alignment": {
+        "metric_name": "Strategic Alignment",
+        "score": 1.0,
+        "score_10": 10.0,
+        "reason": "The output perfectly aligns with all specified evaluation steps. The topic, content bucket, hook style ('shock_stat' with 'Sirf 30% log CSAT clear karte hain'), tone ('Urgent, revelatory, empowering'), and format cues ('voiceover_montage' with descriptive visual cues) all match the chosen strategy. There is no content drift, maintaining focus on CSAT strategy throughout.",
+        "evaluation_steps": [
+          "The chosen strategy is: Topic: CSAT Showdown: Why You're Failing Maths OR RC (The Shocking Truth & YOUR Strategy), Bucket: strategy, Hook: shock_stat, Format: voiceover_montage, Tone: Urgent, revelatory, empowering",
+          "Verify the script matches the specified content bucket and topic",
+          "Check that the hook style matches the strategy's hook_style choice",
+          "Verify the tone matches \u2014 if strategy says 'high energy', the script shouldn't be mellow",
+          "Check the format cues align (e.g., if talking_head, there should be direct-to-camera cues)",
+          "Penalize scripts that drift into a different content bucket mid-way"
+        ]
+      },
+      "overall_score": 0.875,
+      "overall_score_10": 8.75,
+      "qualitative_feedback": "Hook Strength: 10.0/10 | Emotional Arc: 10.0/10 | Pacing: 9.0/10 | Originality: 3.0/10 | Strategic Alignment: 10.0/10",
+      "pass_threshold": true,
+      "rewrite_suggestions": [
+        "Originality (3.0/10): The content uses a common problem-solution approach for CSAT, which is not a fresh angle. The hook, while effective, uses a shock statistic and direct question that is a typical framing rather than unique. It employs several clich\u00e9 phrases like 'Shocking Truth' and 'Victory is yours!', and the visual cues described are overused tropes for short-form content. There are no unexpected analogies or unconventional storytelling elements, making it unlikely to be shared for a novel take."
+      ]
+    }
   }
 ]
