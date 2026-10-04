@@ -36,10 +36,15 @@ class GuardrailsEngine:
 
     def check_hook_rotation(self, hook_style: str, recent_hooks: List[str]) -> bool:
         """Returns True if hook passes rotation check.
-        Fails if the proposed hook was used in both of the last 2 posts.
+        Fails if the proposed hook was used consecutively (in both of the last 2 posts)
+        or repeatedly (>= 2 times in the last 3 posts).
         """
         if len(recent_hooks) >= 2 and recent_hooks[0].lower() == hook_style.lower() and recent_hooks[1].lower() == hook_style.lower():
             return False
+        if len(recent_hooks) >= 3:
+            count = sum(1 for h in recent_hooks[:3] if h.lower() == hook_style.lower())
+            if count >= 2:
+                return False
         return True
 
     def check_format_cooldown(self, format_style: str, recent_formats: List[str]) -> bool:

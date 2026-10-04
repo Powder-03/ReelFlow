@@ -255,5 +255,134 @@
         "Originality (3.0/10): The content uses a common problem-solution approach for CSAT, which is not a fresh angle. The hook, while effective, uses a shock statistic and direct question that is a typical framing rather than unique. It employs several clich\u00e9 phrases like 'Shocking Truth' and 'Victory is yours!', and the visual cues described are overused tropes for short-form content. There are no unexpected analogies or unconventional storytelling elements, making it unlikely to be shared for a novel take."
       ]
     }
+  },
+  {
+    "saved_at": "2026-10-04T17:52:02.077100+00:00",
+    "script": {
+      "title": "COP31: India's Climate Crossroads & The GS3 Questions You CANNOT Afford To Miss.",
+      "hook": "India ka climate future daav par hai... Lekin kya aap jaante hain COP31 se kaunse 3 GS3 questions pakka aayenge?",
+      "segments": [
+        {
+          "segment_id": 1,
+          "type": "hook",
+          "text": "India ka climate future daav par hai... Lekin kya aap jaante hain COP31 se kaunse 3 GS3 questions pakka aayenge?",
+          "visual_cue": "[Split screen: one side 'India' text with a question mark, other side 'COP31' text with a magnifying glass icon]",
+          "estimated_seconds": 5.0
+        },
+        {
+          "segment_id": 2,
+          "type": "build_up",
+          "text": "Yeh questions sirf GS3 ke liye nahi. Yeh aapke future decision-making skills ka blueprint hain, India ke climate crisis tackle karne ke liye. Socho!",
+          "visual_cue": "[Blueprint scroll animation, overlay of 'Future Leaders' text, then a thought bubble with a green earth icon]",
+          "estimated_seconds": 6.0
+        },
+        {
+          "segment_id": 3,
+          "type": "core_value",
+          "text": "COP31 ke core pillars: Mitigation, Adaptation, Finance, Loss & Damage. Har pillar se GS3 ke direct questions India ke context mein analyze karenge.",
+          "visual_cue": "[Four distinct blocks appearing on screen: 'Mitigation', 'Adaptation', 'Finance', 'L&D'. Each block transforms into a question mark.]",
+          "estimated_seconds": 7.0
+        },
+        {
+          "segment_id": 4,
+          "type": "emotional_peak",
+          "text": "Imagine yourself as an officer, making policies. Yeh understanding sirf exam nahi, desh ka future define karegi. Aapka role crucial hai.",
+          "visual_cue": "[Visual of a determined officer looking at a map, then a quick shot of India's diverse landscapes. Overlay text: 'Your Impact Matters']",
+          "estimated_seconds": 6.0
+        },
+        {
+          "segment_id": 5,
+          "type": "cta",
+          "text": "Ready to decode COP31 for GS3 success and India's sustainable future? Follow for full breakdown and exclusive insights. Miss mat karna!",
+          "visual_cue": "[Animated 'Follow' button glowing, then a split screen: one side 'GS3 Success' with a tick, other side 'Sustainable India' with a green leaf icon.]",
+          "estimated_seconds": 5.0
+        }
+      ],
+      "cta": "Follow for in-depth COP31 analysis & GS3 prep!",
+      "content_bucket": "current_affairs",
+      "hook_style": "question",
+      "format": "talking_head",
+      "tone": "Analytical, urgent, thought-provoking",
+      "topic": "COP31: India's Climate Crossroads & The GS3 Questions You CANNOT Afford To Miss."
+    },
+    "evaluation": {
+      "hook_strength": {
+        "metric_name": "Hook Strength",
+        "score": 1.0,
+        "score_10": 10.0,
+        "reason": "The hook immediately creates strong emotional pull and curiosity by stating 'India ka climate future daav par hai' and directly asking about '3 GS3 questions pakka aayenge' from COP31. This specific number and bold claim effectively rewards evaluation steps 5 and 6, making a viewer feel they would miss crucial information if they scrolled past, thus ensuring they stop scrolling within 2 seconds. It avoids generic openings.",
+        "evaluation_steps": [
+          "Read only the 'hook' field of the script",
+          "Check if it creates immediate curiosity, shock, or emotional pull",
+          "Assess whether a viewer would stop scrolling within 2 seconds",
+          "Penalize generic openings like 'Aaj hum baat karenge...' or 'Hey guys'",
+          "Reward specific numbers, bold claims, counter-intuitive statements, or direct questions",
+          "A perfect hook makes the viewer feel they'll miss out if they scroll past"
+        ]
+      },
+      "emotional_arc": {
+        "metric_name": "Emotional Arc",
+        "score": 0.9,
+        "score_10": 9.0,
+        "reason": "The script effectively builds emotional intensity, starting with urgency and curiosity, escalating to empowerment and inspiration in the 'emotional_peak' segment by connecting the topic to the audience's role in national policy. It includes a clear emotional pivot in segment 4 and ends on a higher, more motivating note than it began, successfully avoiding a flat emotional trajectory.",
+        "evaluation_steps": [
+          "Read all segments of the script in order",
+          "Identify the emotional starting point (hook emotion)",
+          "Track how emotion shifts across segments: does it build, dip, then peak?",
+          "Check for at least one emotional pivot (surprise, realization, or empathy moment)",
+          "Penalize flat emotional trajectories where every segment has the same energy",
+          "Reward scripts that end on a higher emotional note than they started"
+        ]
+      },
+      "pacing": {
+        "metric_name": "Pacing",
+        "score": 0.8,
+        "score_10": 8.0,
+        "reason": "The script demonstrates strong rhythmic consistency and natural flow, effectively building information density without rushing the setup or dragging the middle. The CTA feels well-earned. The primary shortcoming is that most segments (2, 3, 4, 5) slightly exceed the target word count of 18-23 words, ranging from 26 to 29 words, which is just outside the 15-25 word penalty threshold.",
+        "evaluation_steps": [
+          "Count words in each segment \u2014 each should be approximately 18-23 words",
+          "Segments significantly outside 15-25 words should be penalized",
+          "Check that information density is even \u2014 no segment is overloaded while others are filler",
+          "Verify the script doesn't rush the setup or drag the middle",
+          "The CTA should feel earned, not abrupt",
+          "Reward rhythmic consistency that would sound natural when spoken aloud"
+        ]
+      },
+      "originality": {
+        "metric_name": "Originality",
+        "score": 0.7,
+        "score_10": 7.0,
+        "reason": "The script offers a fresh and unique angle by specifically linking COP31 to 'GS3 questions' for exam preparation, which differentiates it from typical climate content and targets a niche audience effectively. The hook directly addresses this unique framing, making it potentially shareable within that specific community. However, it uses some clich\u00e9 phrases like 'India ka climate future daav par hai' and follows a predictable content structure, lacking unexpected analogies or unconventional storytelling.",
+        "evaluation_steps": [
+          "Assess whether the angle or perspective is fresh \u2014 not a common take on this topic",
+          "Check if the hook offers a unique framing that differentiates from typical content",
+          "Penalize clich\u00e9 phrases, overused Instagram tropes, and predictable structures",
+          "Reward unexpected analogies, novel comparisons, or unconventional storytelling",
+          "Consider: would this script make a viewer share it because they haven't seen this take before?"
+        ]
+      },
+      "strategic_alignment": {
+        "metric_name": "Strategic Alignment",
+        "score": 1.0,
+        "score_10": 10.0,
+        "reason": "The script strongly aligns with all evaluation steps. The topic, content bucket, hook style, format, and tone perfectly match the specified strategy. The hook is a clear question, the content consistently addresses COP31 and GS3 within current affairs, the tone is urgent and thought-provoking, and the visual cues are appropriate for a talking head format. There is no drift into a different content bucket.",
+        "evaluation_steps": [
+          "The chosen strategy is: Topic: COP31: India's Climate Crossroads & The GS3 Questions You CANNOT Afford To Miss., Bucket: current_affairs, Hook: question, Format: talking_head, Tone: Analytical, urgent, thought-provoking",
+          "Verify the script matches the specified content bucket and topic",
+          "Check that the hook style matches the strategy's hook_style choice",
+          "Verify the tone matches \u2014 if strategy says 'high energy', the script shouldn't be mellow",
+          "Check the format cues align (e.g., if talking_head, there should be direct-to-camera cues)",
+          "Penalize scripts that drift into a different content bucket mid-way"
+        ]
+      },
+      "overall_score": 0.895,
+      "overall_score_10": 8.95,
+      "qualitative_feedback": "Hook Strength: 10.0/10 | Emotional Arc: 9.0/10 | Pacing: 8.0/10 | Originality: 7.0/10 | Strategic Alignment: 10.0/10",
+      "pass_threshold": true,
+      "rewrite_suggestions": [
+        "Pacing (8.0/10): The script demonstrates strong rhythmic consistency and natural flow, effectively building information density without rushing the setup or dragging the middle. The CTA feels well-earned. The primary shortcoming is that most segments (2, 3, 4, 5) slightly exceed the target word count of 18-23 words, ranging from 26 to 29 words, which is just outside the 15-25 word penalty threshold.",
+        "Originality (7.0/10): The script offers a fresh and unique angle by specifically linking COP31 to 'GS3 questions' for exam preparation, which differentiates it from typical climate content and targets a niche audience effectively. The hook directly addresses this unique framing, making it potentially shareable within that specific community. However, it uses some clich\u00e9 phrases like 'India ka climate future daav par hai' and follows a predictable content structure, lacking unexpected analogies or unconventional storytelling."
+      ]
+    }
   }
 ]
