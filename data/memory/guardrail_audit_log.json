@@ -339,5 +339,78 @@
     "original_hook": "shock_stat",
     "rotated_hook": "personal_story",
     "auto_picked": true
+  },
+  {
+    "timestamp": "2026-10-04T18:07:52.528456+00:00",
+    "strategy_topic": "Mains Ethics Case Study: How to Score 130+ with the 4-Stakeholder Matrix",
+    "hook_style": "question",
+    "passed": true,
+    "violations": [],
+    "reasoning": "Ethics GS4 has the highest score variance in UPSC Mains. Aspirants struggle with case study frameworks, giving this high organic shareability.",
+    "confidence": 0.94,
+    "hook_changed": false,
+    "original_hook": "question",
+    "rotated_hook": null,
+    "auto_picked": false
+  },
+  {
+    "timestamp": "2026-10-04T18:07:52.544551+00:00",
+    "strategy_topic": "Modern Indian History Chronology: The 1857-1947 Rapid Recall Technique",
+    "hook_style": "shock_stat",
+    "passed": false,
+    "violations": [
+      "HOOK_FATIGUE: 'shock_stat' has been used consecutively in recent posts"
+    ],
+    "reasoning": "History timeline memorization is a major pain point. A rapid recall hook creates immediate curiosity.",
+    "confidence": 0.89,
+    "hook_changed": true,
+    "original_hook": "shock_stat",
+    "rotated_hook": "personal_story",
+    "auto_picked": false
+  },
+  {
+    "timestamp": "2026-10-04T18:07:52.558839+00:00",
+    "strategy_topic": "Modern Indian History Chronology: The 1857-1947 Rapid Recall Technique",
+    "hook_style": "personal_story",
+    "passed": true,
+    "violations": [],
+    "reasoning": "History timeline memorization is a major pain point. A rapid recall hook creates immediate curiosity.",
+    "confidence": 0.89,
+    "hook_changed": true,
+    "original_hook": "shock_stat",
+    "rotated_hook": "personal_story",
+    "auto_picked": false
+  },
+  {
+    "timestamp": "2026-10-04T18:07:52.574554+00:00",
+    "strategy_topic": "Complete Strategy for COP31: India's Climate Dilemma & Your UPSC Edge.",
+    "hook_style": "myth_bust",
+    "passed": false,
+    "violations": [
+      "TOPIC_REPETITION: 'Complete Strategy for COP31: India's Climate Dilemma & Your UPSC Edge.' overlaps heavily with recent posts"
+    ],
+    "reasoning": "Re-explaining the previous topic with a new title.",
+    "confidence": 0.72,
+    "hook_changed": false,
+    "original_hook": "myth_bust",
+    "rotated_hook": null,
+    "auto_picked": false
+  },
+  {
+    "timestamp": "2026-10-04T18:07:52.590472+00:00",
+    "strategy_topic": "Repeated Attempt: COP31: India's Climate Dilemma & Your UPSC Edge.",
+    "hook_style": "shock_stat",
+    "passed": true,
+    "violations": [
+      "TOPIC_REPETITION: 'Repeated Attempt: COP31: India's Climate Dilemma & Your UPSC Edge.' overlaps heavily with recent posts",
+      "HOOK_FATIGUE: 'shock_stat' has been used consecutively in recent posts",
+      "FALLBACK_TRIGGERED: Strategy Agent failed guardrails 2 times. Auto-selected historical best-performing combination with needs_human_review=True."
+    ],
+    "reasoning": "Testing retry bound enforcement after repeated rejections.",
+    "confidence": 0.6,
+    "hook_changed": true,
+    "original_hook": "shock_stat",
+    "rotated_hook": "personal_story",
+    "auto_picked": true
   }
 ]
